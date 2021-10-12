@@ -1,0 +1,17 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <!-- routerLink lo uso al posto di href poichè permette di non riscaricare tutto il contenuto -->
+        <!-- routerLinkActive serve per impostare la classe css al link attivo nella navbar -->
+        <li routerLinkActive="active current">
+          <a routerLink="/followers" 
+             [queryParams]= "{page: 1, order: 'newest'}">Followers</a>
+        </li>
+        <li routerLinkActive="active current">
+          <a routerLink="/posts">Posts</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
