@@ -1,0 +1,31 @@
+name: Docker Image and Push CI
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    
+    env:
+      USER: ${{ secrets.DOCKERHUB_USER }}
+      PSW: ${{ secrets.DOCKERHUB_PSW }}
+
+    steps:
+    - name: Checkout Docker
+      uses: actions/checkout@v2
+      
+    - name: Login DockerHub
+      run: docker login -u USER -p PSW
+    
+    - name: Build the Docker image
+      run: docker build -t hello-world-ss:$(date +%s) .
+    
+    - name: Tag the Docker image
+      run: docker tag hello-world-ss:$(date +%s) USER/hello-world-ss:$(date +%s)
+      
+    - name: Push the Docker image
+      run: docker push USER/hello-world-ss:$(date +%s)
